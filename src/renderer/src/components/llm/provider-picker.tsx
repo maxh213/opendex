@@ -20,6 +20,7 @@ const PROVIDER_ICON: Record<LlmProvider, LucideIcon> = {
   openai: KeyRound,
   anthropic: KeyRound,
   xai: KeyRound,
+  ollama: Cloud,
   gateway: Network,
   opendex: Cloud,
 };
@@ -301,6 +302,10 @@ function ProviderConfig({
           present={data.secrets[meta.secretName]}
           onSave={(v) => setSecret(meta.secretName!, v)}
         />
+      )}
+
+      {meta.id !== "apple" && meta.note && (
+        <p className="text-xs text-muted-foreground">{meta.note}</p>
       )}
     </div>
   );

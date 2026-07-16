@@ -1,9 +1,9 @@
 # Releasing OpenDex
 
 Releases are built and published automatically by GitHub Actions
-(`.github/workflows/release.yml`) whenever you push a `v*.*.*` tag. Each platform
-runs on its own runner (macOS / Ubuntu / Windows), and electron-builder uploads
-the installers **and** the `latest-*.yml` update manifests to a GitHub Release.
+(`.github/workflows/release.yml`) whenever you push a `v*.*.*` tag. This fork
+publishes its Linux build from an Ubuntu runner, and electron-builder uploads
+the installers **and** the `latest-linux.yml` update manifest to a GitHub Release.
 The app's auto-updater (`src/main/updater.ts`) reads those manifests straight
 from the release — there is no separate update server to maintain.
 
@@ -22,9 +22,9 @@ pnpm cut:major   # 0.1.0 -> 1.0.0
 > These wrap `pnpm version <type> && git push --follow-tags`. `pnpm version`
 > refuses to run with uncommitted changes, so commit your work first.
 
-Then watch the build at <https://github.com/wassgha/opendex/actions>.
+Then watch the build at <https://github.com/maxh213/opendex/actions>.
 electron-builder uploads installers to a **draft** GitHub Release while the
-three platform jobs run. Once they all succeed, the `publish` job writes
+build runs. Once it succeeds, the `publish` job writes
 AI-generated release notes (from the diff since the previous tag) and flips
 the release to **published**. Auto-update only picks up published releases.
 

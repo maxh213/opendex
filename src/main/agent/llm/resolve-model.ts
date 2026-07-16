@@ -31,6 +31,12 @@ export async function resolveModel(config: OpenDexConfig): Promise<LanguageModel
     case "xai":
       if (!process.env.XAI_API_KEY) throw new Error("no xAI API key is set");
       return createXai({ apiKey: process.env.XAI_API_KEY })(model);
+    case "ollama":
+      if (!process.env.OLLAMA_API_KEY) throw new Error("no Ollama Cloud API key is set");
+      return createOpenAI({
+        apiKey: process.env.OLLAMA_API_KEY,
+        baseURL: "https://ollama.com/v1",
+      }).chat(model);
     case "apple": {
       // Native (Swift/Rust), macOS-only — dynamic-imported so non-darwin builds
       // never load the binary, and the chunk is only pulled when selected.

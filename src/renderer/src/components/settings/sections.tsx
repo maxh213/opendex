@@ -516,10 +516,11 @@ function PrivacySection({ data, setConfig }: SectionProps) {
         title="Anonymous usage data"
         description={
           <>
-            Helps improve OpenDex. Never sends voice, transcripts, prompts, API
-            keys, opened URLs, or file paths.{" "}
+            Disabled by default in this fork. If the fork maintainer configures
+            analytics, it never sends voice, transcripts, prompts, API keys,
+            opened URLs, or file paths.{" "}
             <a
-              href="https://github.com/wassgha/opendex/blob/main/PRIVACY.md"
+              href="https://github.com/maxh213/opendex/blob/main/PRIVACY.md"
               target="_blank"
               rel="noreferrer"
               className="underline hover:text-foreground"

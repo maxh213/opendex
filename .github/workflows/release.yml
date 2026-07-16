@@ -14,7 +14,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        # This fork currently publishes the Linux build used by its maintainer.
+        # Other platforms can still be built locally from the same source.
+        os: [ubuntu-latest]
 
     steps:
       - name: Checkout
@@ -108,7 +110,7 @@ jobs:
           fi
           pnpm tsx scripts/generate-release-notes.ts "${ARGS[@]}" > release-notes.md
           gh release edit "${{ github.ref_name }}" \
-            --repo wassgha/opendex \
+            --repo maxh213/opendex \
             --notes-file release-notes.md
 
       - name: Publish the draft release
@@ -116,5 +118,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release edit "${{ github.ref_name }}" \
-            --repo wassgha/opendex \
+            --repo maxh213/opendex \
             --draft=false --latest

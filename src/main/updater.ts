@@ -71,8 +71,11 @@ export function initAutoUpdater(): void {
       });
   });
 
-  void autoUpdater.checkForUpdates();
+  // Errors are already surfaced by the updater's `error` event above. Catch
+  // the promise too so an empty/new release feed cannot become an unhandled
+  // rejection in the main process.
+  void autoUpdater.checkForUpdates().catch(() => {});
   setInterval(() => {
-    void autoUpdater.checkForUpdates();
+    void autoUpdater.checkForUpdates().catch(() => {});
   }, CHECK_INTERVAL_MS);
 }
