@@ -54,6 +54,17 @@ import type { DeepPartial, OpenDexConfig, SecretName, SttProvider } from "./conf
 import { initAutoUpdater } from "./updater";
 import { initAnalytics, track } from "./analytics";
 
+// A GUI app can outlive the terminal or launcher pipe it inherited. Node emits
+// EPIPE as an unhandled stream error when a later console.log writes to that
+// closed pipe, which would otherwise surface as a main-process exception.
+function ignoreBrokenPipe(stream: NodeJS.WriteStream): void {
+  stream.on("error", (error: NodeJS.ErrnoException) => {
+    if (error.code !== "EPIPE") throw error;
+  });
+}
+ignoreBrokenPipe(process.stdout);
+ignoreBrokenPipe(process.stderr);
+
 // Load a dev .env first; initConfig() then layers the user's saved config on
 // top (config values win; .env remains a fallback for unset secrets).
 loadEnv();
