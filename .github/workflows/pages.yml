@@ -9,10 +9,8 @@ on:
     paths:
       - "site/**"
       - ".github/workflows/pages.yml"
-    # Also redeploy on every release tag so the site picks up the new version
-    # (the version is injected at build time from the newest tag — see below).
-    tags:
-      - "v*.*.*"
+    # Fork releases do not deploy Pages automatically. Use workflow_dispatch
+    # after enabling GitHub Pages for this repository.
   workflow_dispatch:
 
 permissions:
