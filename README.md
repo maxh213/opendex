@@ -11,8 +11,8 @@ Wake it, talk to it, and a tool-using agent talks back — in a cinematic interf
 [![Platforms](https://img.shields.io/badge/platforms-macOS%20·%20Windows%20·%20Linux-111?style=flat-square)](#install)
 [![Electron](https://img.shields.io/badge/Electron-42-111?style=flat-square&logo=electron&logoColor=9FEAF9)](https://www.electronjs.org/)
 [![Vercel AI SDK](https://img.shields.io/badge/Vercel%20AI%20SDK-v6-111?style=flat-square)](https://sdk.vercel.ai/)
-[![Stars](https://img.shields.io/github/stars/wassgha/notjarvis?style=flat-square&color=111)](https://github.com/wassgha/notjarvis/stargazers)
-[![Latest release](https://img.shields.io/github/v/release/wassgha/opendex?label=latest%20release&sort=semver&style=flat-square&color=111)](https://github.com/wassgha/opendex/releases/latest)
+[![Stars](https://img.shields.io/github/stars/maxh213/opendex?style=flat-square&color=111)](https://github.com/maxh213/opendex/stargazers)
+[![Latest release](https://img.shields.io/github/v/release/maxh213/opendex?label=latest%20release&sort=semver&style=flat-square&color=111)](https://github.com/maxh213/opendex/releases/latest)
 
 <a href="https://getopendex.com/"><img alt="OpenDex — Control your computer with voice" src="screenshots/open-music.png" style="max-width: 90%;" /></a>
 <br/>
@@ -31,10 +31,10 @@ When you click away, OpenDex collapses into a compact bar that hangs from the to
 
 <div align="center">
 
-<a href="https://github.com/wassgha/opendex/releases/latest/download/OpenDex-mac-arm64.dmg"><img src="assets/download/download-macos-arm64.svg" alt="Download for macOS — Apple Silicon" height="48"></a> &nbsp; <a href="https://github.com/wassgha/opendex/releases/latest/download/OpenDex-mac-x64.dmg"><img src="assets/download/download-macos-x64.svg" alt="Download for macOS — Intel" height="48"></a> &nbsp; <a href="https://github.com/wassgha/opendex/releases/latest/download/OpenDex-Setup.exe"><img src="assets/download/download-windows.svg" alt="Download for Windows" height="48"></a> &nbsp; <a href="https://github.com/wassgha/opendex/releases/latest/download/OpenDex-linux.AppImage"><img src="assets/download/download-linux-appimage.svg" alt="Download the AppImage for Linux" height="48"></a>
+<a href="https://github.com/maxh213/opendex/releases/latest/download/OpenDex-linux.AppImage"><img src="assets/download/download-linux-appimage.svg" alt="Download the AppImage for Linux" height="48"></a>
 </div>
 
-See the [Releases](https://github.com/wassgha/opendex/releases) page.
+See the [Releases](https://github.com/maxh213/opendex/releases) page.
 
 ## What is OpenDex?
 
@@ -45,7 +45,7 @@ OpenDex is an agentic harness built around voice. It's fully customizable: chang
 ## Features
 
 - 🎙️ **Voice-first, real-time loop** — wake word or hotkey, then speak. Follow-ups work in the same session; say the wake word again to cut it off mid-reply.
-- 🧠 **Bring any model**  — Apple Intelligence on-device (macOS, free), your own OpenAI, Anthropic, or xAI key, or Vercel AI Gateway (one key, many models). A hosted OpenDex plan is on the way.
+- 🧠 **Bring any model**  — Apple Intelligence on-device (macOS, free), your own OpenAI, Anthropic, xAI, or Ollama Cloud key, or Vercel AI Gateway (one key, many models). A hosted OpenDex plan is on the way.
 - **Can run offline** — Vosk wake word + local Whisper + system TTS are a local-first option. No accounts, no uploads — only the LLM call leaves your machine, and you can skip that too on Apple Silicon.
 - 🔌 **Pluggable voice I/O**  —  Choose between push-to-talk, Vosk, or Web Speech for wake; local Whisper/Vosk, OpenAI, or Web Speech for transcription; ElevenLabs or the OS voice for output or switch to a fully-integrated Realtime stack using OpenAI Realtime or xAI Voice for a more natural conversation
 - 🎨 **Build your own themes** — Jarvis HUD, Talking Dot, or Typing Cursor. Each one is a full interface, not just a skin, and they react to your mic.
@@ -71,7 +71,7 @@ OpenDex is fully theamable, you can change anything about the user interface and
 > Requires [Node.js](https://nodejs.org) 20+ and [pnpm](https://pnpm.io).
 
 ```bash
-git clone https://github.com/wassgha/opendex.git
+git clone https://github.com/maxh213/opendex.git
 cd opendex
 pnpm install
 pnpm dev            # launches the OpenDex desktop window
@@ -81,7 +81,7 @@ On first launch a short **onboarding wizard** walks you through choosing a model
 
 Pick where the thinking happens — every part of the loop can be free/offline:
 
-- **Model:** **Apple Intelligence** (on-device, free, no key — macOS only), your own **OpenAI**/**Anthropic**/**xAI** key, or the **Vercel AI Gateway** (one key, any provider).
+- **Model:** **Apple Intelligence** (on-device, free, no key — macOS only), your own **OpenAI**/**Anthropic**/**xAI**/**Ollama Cloud** key, or the **Vercel AI Gateway** (one key, any provider).
 - **Voice out:** "System voice" (free) or ElevenLabs (key).
 - **Voice in:** local **Whisper**/**Vosk** (free, offline, one-time model download) or OpenAI Whisper (key).
 - **Wake:** push-to-talk / Vosk (free, offline) or Web Speech (browser).
@@ -93,7 +93,7 @@ On a Mac with Apple Intelligence enabled, the whole loop (model + speech + voice
 Keys are normally entered in-app and stored encrypted. For development you can seed them via `.env` (used only as a fallback):
 
 ```bash
-cp .env.local.example .env
+cp .example.env .env
 ```
 
 | Variable | Purpose |
@@ -102,10 +102,11 @@ cp .env.local.example .env
 | `OPENAI_API_KEY` | chat via OpenAI directly, **and/or** OpenAI Whisper transcription |
 | `ANTHROPIC_API_KEY` | chat via Anthropic (Claude) directly |
 | `XAI_API_KEY` | chat via xAI (Grok) directly |
+| `OLLAMA_API_KEY` | chat with open models hosted by Ollama Cloud |
 | `ELEVENLABS_API_KEY` | ElevenLabs TTS (skip if using the system voice) |
 | `TAVILY_API_KEY` | web-search tool (optional) |
 
-> The chat provider needs **one** of `AI_GATEWAY_API_KEY` / `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `XAI_API_KEY` — matching the provider you select. Apple Intelligence needs none.
+> The chat provider needs **one** of `AI_GATEWAY_API_KEY` / `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` / `XAI_API_KEY` / `OLLAMA_API_KEY` — matching the provider you select. Apple Intelligence needs none.
 
 ## Skills & permissions
 
@@ -121,7 +122,7 @@ The agent's capabilities are **skills** — declarative tool bundles. Sensitive 
 - [x] Pluggable wake-word + speech-to-text (incl. free offline Whisper & Vosk)
 - [x] Skills + permission gate *(Open apps & URLs)*
 - [x] Computer-use — screen capture + mouse/keyboard control, gated & opt-in
-- [x] Pluggable model providers — Apple on-device, OpenAI/Anthropic/xAI keys, AI Gateway
+- [x] Pluggable model providers — Apple on-device, OpenAI/Anthropic/xAI/Ollama Cloud keys, AI Gateway
 - [x] Signed GitHub releases + auto-update
 - [ ] OpenDex hosted subscription — sign in, no keys, cloud-synced settings & history
 - [ ] More built-in skills (filesystem, maps, timers, etc …)

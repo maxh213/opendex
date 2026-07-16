@@ -21,8 +21,10 @@ const devSkip = (): boolean => !app.isPackaged && process.env.GA_DEBUG !== "1";
 // page); the api secret only authorizes sending events to this property. Both
 // are safe to bundle in a client. Env vars win so dev can point at a test
 // property without editing source.
-const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID ?? "G-HBB5QNHS90";
-const GA_API_SECRET = process.env.GA_API_SECRET ?? "ShIZno_5RQavnZFZ6UjU_w";
+// A fork should not report into the upstream project's analytics property.
+// Maintainers can opt into their own property explicitly at build/runtime.
+const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID ?? "G-XXXXXXXXXX";
+const GA_API_SECRET = process.env.GA_API_SECRET ?? "";
 
 const ENDPOINT = "https://www.google-analytics.com/mp/collect";
 

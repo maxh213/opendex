@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 // Always points at the newest release's assets (GitHub redirects `latest`).
-export const REL = "https://github.com/wassgha/opendex/releases/latest/download";
-export const REPO = "https://github.com/wassgha/opendex";
+export const REL = "https://github.com/maxh213/opendex/releases/latest/download";
+export const REPO = "https://github.com/maxh213/opendex";
 
 export type OSKey = "mac-arm64" | "mac-x64" | "win" | "linux-appimage" | "linux-deb";
 
